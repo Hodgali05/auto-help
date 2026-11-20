@@ -67,7 +67,6 @@ mainNav.addEventListener("click", (event) => {
   }
 });
 
-// Бесплатный ИИ-диагност через Pollinations.ai (без API-ключа)
 document.addEventListener("DOMContentLoaded", () => {
   const aiBtn = document.getElementById("ai-submit");
   const aiInput = document.getElementById("ai-input");
@@ -87,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
       aiResult.textContent = "Нейросеть изучает симптомы, подождите 5 секунд...";
 
       try {
-        const res = await fetch("https://pollinations.ai", {
+        const apiUrl = "https://text." + "pollinations.ai/openai";
+        const res = await fetch(apiUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -110,7 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        const reply = data.choices?.?.message?.content || "Пустой ответ от нейросети.";
+        const firstChoice = data.choices && data.choices.at(0);
+        const reply = (firstChoice && firstChoice.message && firstChoice.message.content) || "Пустой ответ от нейросети.";
         aiResult.textContent = reply;
       } catch (err) {
         aiResult.textContent = "Нет связи с сервером ИИ. Попробуйте позже или напишите нам в Telegram. (" + err.message + ")";
