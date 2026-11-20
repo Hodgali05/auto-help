@@ -30,8 +30,8 @@ function getRequestMessage() {
 
 function updateContactLinks(message) {
   const encodedMessage = encodeURIComponent(message);
-  telegramLink.href = `https://t.me/${TELEGRAM_USERNAME}?text=${encodedMessage}`;
-  whatsappLink.href = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`;
+  telegramLink.href = `https://t.me{TELEGRAM_USERNAME}?text=${encodedMessage}`;
+  whatsappLink.href = `https://wa.me{WHATSAPP_PHONE}?text=${encodedMessage}`;
 }
 
 tariffButtons.forEach((button) => {
@@ -64,5 +64,60 @@ mainNav.addEventListener("click", (event) => {
     mainNav.classList.remove("is-open");
     menuToggle.setAttribute("aria-expanded", "false");
     menuToggle.setAttribute("aria-label", "Открыть меню");
+  }
+});
+
+// Бесплатный ИИ-диагност через Pollinations.ai (без API-ключа)
+document.addEventListener("DOMContentLoaded", () => {
+  const aiBtn = document.getElementById("ai-submit");
+  const aiInput = document.getElementById("ai-input");
+  const aiResult = document.getElementById("ai-result");
+
+  if (aiBtn && aiInput && aiResult) {
+    aiBtn.addEventListener("click", async () => {
+      const text = aiInput.value.trim();
+      if (!text) {
+        alert("Пожалуйста, опишите симптомы или введите код ошибки.");
+        return;
+      }
+
+      aiBtn.disabled = true;
+      aiBtn.textContent = "Анализирую...";
+      aiResult.style.display = "block";
+      aiResult.textContent = "Нейросеть изучает симптомы, подождите 5 секунд...";
+
+      try {
+        const res = await fetch("https://pollinations.ai", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: "openai",
+            messages: [
+              {
+                role: "system",
+                content: "Ты опытный автодиагност сервиса «АвтоЭксперт» (легковые и грузовые авто). Проанализируй симптомы или код ошибки OBD-II от водителя. Ответь структурированно и кратко (до 120 слов): 1) 2–3 вероятные причины; 2) Можно ли безопасно продолжать движение; 3) Что проверить в первую очередь. В конце мягко предложи оформить экспресс-разбор со специалистом ниже на сайте."
+              },
+              { role: "user", content: text }
+            ]
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          aiResult.textContent = "Ошибка от сервиса: " + (data.error?.message || res.status);
+          return;
+        }
+
+        const reply = data.choices?.?.message?.content || "Пустой ответ от нейросети.";
+        aiResult.textContent = reply;
+      } catch (err) {
+        aiResult.textContent = "Нет связи с сервером ИИ. Попробуйте позже или напишите нам в Telegram. (" + err.message + ")";
+      } finally {
+        aiBtn.disabled = false;
+        aiBtn.textContent = "Проверить с ИИ";
+      }
+    });
   }
 });
