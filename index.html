@@ -280,23 +280,34 @@
     <div id="ai-result" class="ai-result" style="display: none;"></div>
   </div>
 </section><section class="request section-wrap" id="request">
+         
       <div class="request-panel">
         <div class="request-copy">
           <div class="eyebrow"><span class="section-index">06</span> Быстрая заявка</div>
-          <h2>Опишите, что<br><span>происходит.</span></h2>
+          <h2>Опишите, что происходит.</h2>
           <p>Расскажите о машине и симптомах. Подготовлюсь к разговору и подскажу, какие данные помогут быстрее разобраться.</p>
           <div class="contact-options">
-            <a class="contact-button telegram-link" href="https://t.me/uyxix" target="_blank" rel="noopener noreferrer">
-              <span class="contact-icon" aria-hidden="true">➤</span><span><strong>Telegram · @uyxix</strong><small>Удобно отправить фото и видео</small></span><span class="contact-arrow">↗</span>
+            <a class="contact-button telegram-link" href="https://t.me" target="_blank" rel="noopener noreferrer">
+              <span class="contact-icon" aria-hidden="true">/</span><span><strong>Telegram · @uyxix</strong><small>Удобно отправить фото и видео</small></span><span class="contact-arrow">/</span>
             </a>
-            <a class="contact-button whatsapp-link" href="https://wa.me/79993100540" target="_blank" rel="noopener noreferrer">
-              <span class="contact-icon whatsapp-icon" aria-hidden="true">◉</span><span><strong>WhatsApp · +7 (999) 310-05-40</strong><small>Быстрый вопрос в мессенджере</small></span><span class="contact-arrow">↗</span>
+            <a class="contact-button whatsapp-link" href="https://wa.me" target="_blank" rel="noopener noreferrer">
+              <span class="contact-icon whatsapp-logo" aria-hidden="true">/</span><span><strong>WhatsApp · +7 (999) 310-05-40</strong><small>Быстрый вопрос в мессенджере</small></span><span class="contact-arrow">/</span>
             </a>
             <a class="contact-button phone-link" href="tel:+79993100540">
-              <span class="contact-icon phone-icon" aria-hidden="true">⌕</span><span><strong>Позвонить · +7 (999) 310-05-40</strong><small>Связаться напрямую по телефону</small></span><span class="contact-arrow">↗</span>
+              <span class="contact-icon phone-icon" aria-hidden="true">/</span><span><strong>Позвонить · +7 (999) 310-05-40</strong><small>Связаться напрямую по телефону</small></span><span class="contact-arrow">/</span>
             </a>
           </div>
-          <p class="contact-hint">Для быстрого разбора можете приложить фото или видео неисправности.</p>
+          <p class="contact-note">Для быстрого разбора можете приложить фото или видео неисправности.</p>
+
+          <div class="payment-block" id="payment">
+            <div class="payment-title">Быстрая оплата консультации после согласования:</div>
+            <div class="payment-grid">
+              <a class="pay-btn pay-sbp" href="https://cbrpay.ru" target="_blank" rel="noopener noreferrer">Оплатить по СБП</a>
+              <a class="pay-btn pay-sber" href="https://sberbank.ru" target="_blank" rel="noopener noreferrer">СберБанк</a>
+              <a class="pay-btn pay-vtb" href="https://paymo.ru" target="_blank" rel="noopener noreferrer">ВТБ</a>
+            </div>
+            <p class="payment-note">Перевод по номеру <strong>+7 (999) 310-05-40</strong> или по прямой ссылке банка. Чек самозанятого отправляю сразу после оплаты.</p>
+          </div>
         </div>
         <form class="request-form">
           <label for="service">Выбранная услуга</label>
@@ -305,14 +316,15 @@
           <input id="name" name="name" type="text" placeholder="Ваше имя" autocomplete="name" required>
           <label for="vehicle">Автомобиль</label>
           <input id="vehicle" name="vehicle" type="text" placeholder="Марка, модель, год">
-          <label for="problem">Что случилось?</label>
+          <label for="problem">Что случилось</label>
           <textarea id="problem" name="problem" rows="4" placeholder="Опишите симптомы, ошибки или что уже проверяли..." required></textarea>
-          <button class="button button-primary submit-button" type="submit">Подготовить сообщение <span aria-hidden="true">↗</span></button>
+          <button class="button button-primary submit-button" type="submit">Подготовить сообщение <span aria-hidden="true">/</span></button>
           <p class="form-feedback" aria-live="polite"></p>
           <p class="form-privacy">Нажимая кнопку, вы подготовите текст сообщения для выбранного мессенджера. Форма не отправляет ваши данные на сервер.</p>
         </form>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
