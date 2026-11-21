@@ -9,6 +9,7 @@ const phoneLink = document.querySelector(".phone-link");
 const menuToggle = document.querySelector(".menu-toggle");
 const mainNav = document.querySelector(".main-nav");
 const serviceField = document.querySelector("#service");
+const problemField = document.querySelector("#problem");
 const tariffButtons = document.querySelectorAll(".tariff-select");
 
 document.querySelector("#current-year").textContent = new Date().getFullYear();
@@ -73,6 +74,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const aiResult = document.getElementById("ai-result");
 
   if (aiBtn && aiInput && aiResult) {
+    // Создаем кнопку переноса ответа ИИ в заявку
+    const transferBtn = document.createElement("button");
+    transferBtn.type = "button";
+    transferBtn.className = "button button-primary";
+    transferBtn.style.marginTop = "16px";
+    transferBtn.style.display = "none";
+    transferBtn.textContent = "Отправить этот разбор специалисту →";
+    aiResult.insertAdjacentElement("afterend", transferBtn);
+
+    let lastQuestion = "";
+    let lastAiReply = "";
+
+    transferBtn.addEventListener("click", () => {
+      if (serviceField && !serviceField.value.trim()) {
+        serviceField.value = "Экспресс-разбор ошибки";
+      }
+      if (problemField) {
+        problemField.value = `Симптомы: ${lastQuestion}\n\nПредварительный разбор ИИ:\n${lastAiReply}`;
+      }
+      if (feedback) {
+        feedback.textContent = "Данные из ИИ-диагностики перенесены в заявку. Укажите имя и автомобиль, затем нажмите «Подготовить сообщение».";
+      }
+      requestForm.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
     aiBtn.addEventListener("click", async () => {
       const text = aiInput.value.trim();
       if (!text) {
@@ -82,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       aiBtn.disabled = true;
       aiBtn.textContent = "Анализирую...";
+      transferBtn.style.display = "none";
       aiResult.style.display = "block";
       aiResult.textContent = "Нейросеть изучает симптомы, подождите 5 секунд...";
 
@@ -113,6 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const firstChoice = data.choices && data.choices.at(0);
         const reply = (firstChoice && firstChoice.message && firstChoice.message.content) || "Пустой ответ от нейросети.";
         aiResult.textContent = reply;
+
+        lastQuestion = text;
+        lastAiReply = reply;
+        transferBtn.style.display = "inline-flex";
       } catch (err) {
         aiResult.textContent = "Нет связи с сервером ИИ. Попробуйте позже или напишите нам в Telegram. (" + err.message + ")";
       } finally {
