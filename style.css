@@ -339,5 +339,60 @@ h2 { font-size: clamp(38px, 4.5vw, 57px); font-weight: 600; letter-spacing: -.06
   line-height: 1.75;
   white-space: pre-line;
   font-size: 13px;
+}/* Блок быстрой оплаты (СБП, Сбер, ВТБ) */
+.payment-block {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
 }
+
+.payment-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.pay-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+  text-align: center;
+  transition: opacity 0.2s ease;
+}
+
+.pay-btn:hover {
+  opacity: 0.9;
+}
+
+.pay-sbp { background: #1D1346; }
+.pay-sber { background: #21A038; }
+.pay-vtb { background: #002882; }
+
+.payment-note {
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
