@@ -251,7 +251,23 @@
       </div>
     </section>
 
-    <section class="request section-wrap" id="request">
+    <!-- БЛОК ИИ-ДИАГНОСТА -->
+<section class="ai-diag section-wrap" id="ai-diag">
+  <div class="section-head">
+    <p class="eyebrow"><span class="section-index">07s /</span> ИИ-помощник</p>
+    <h2>Предварительная онлайн-диагностика</h2>
+    <p class="section-subtitle">Опишите симптомы, поведение авто или код ошибки OBD-II — ИИ-ассистент подскажет вероятные причины и можно ли продолжать движение.</p>
+  </div>
+
+  <div class="ai-box">
+    <textarea id="ai-input" class="ai-textarea" rows="3" placeholder="Например: Горит Check Engine, ошибка P0171, на холостых плавают обороты и вырос расход..."></textarea>
+    <div class="ai-controls">
+      <button type="button" id="ai-submit" class="button-primary">Проверить с ИИ</button>
+      <span class="ai-note">Бесплатный экспресс-анализ за 5 секунд</span>
+    </div>
+    <div id="ai-result" class="ai-result" style="display: none;"></div>
+  </div>
+</section><section class="request section-wrap" id="request">
       <div class="request-panel">
         <div class="request-copy">
           <div class="eyebrow"><span class="section-index">06</span> Быстрая заявка</div>
